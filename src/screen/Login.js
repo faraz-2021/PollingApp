@@ -6,9 +6,10 @@ import {
   View,
   TextInput,
 } from "react-native";
+import { Colors } from '../component/Colors'
 // import AsyncStorage from "@react-native-community/async-storage";
 
-export default function Login() {
+export default function Login(props) {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -31,6 +32,9 @@ export default function Login() {
       />
       <TouchableOpacity style={styles.button} >
         <Text style={styles.opacityText}> Sign In </Text>
+      </TouchableOpacity>
+      <TouchableOpacity  style={styles.Move} onPress={()=>props.navigation.navigate('Signup')}>
+        <Text style={styles.opacityText}> Dont have account? Signup </Text>
       </TouchableOpacity>
     </View>
   );
@@ -60,4 +64,10 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginTop: 15,
   },
+  Move:{
+  marginTop:10
+  },
+  opacityText:{
+      color:Colors.blue
+  }
 });
