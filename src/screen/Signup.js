@@ -14,9 +14,9 @@ export default function Signup(props) {
   const [confirm, setConfirm] = useState("");
 
   const user = {
-    "username": text,
-    "password": password1,
-    "role": confirm,
+    username: text,
+    password: password1,
+    role: confirm,
   };
 
   return (
