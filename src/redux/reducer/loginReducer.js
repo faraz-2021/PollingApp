@@ -1,26 +1,26 @@
-import { SIGNUP_REQUEST,SIGNUP_SUCCESS,SIGNUP_FAILURE } from "../constant/type";
+import { LOGIN_REQUEST,LOGIN_SUCCESS,LOGIN_FAILURE } from "../constant/constant";
 
 const initialState = {
   isLoading: false,
   isSuccess: false,
 };
 
-const SignupReducer = (state = initialState, action) => {
+const LoginReducer = (state = initialState, action) => {
     console.log(action.type, "kkkkk");
     switch (action.type) {
-      case SIGNUP_REQUEST: {
+      case LOGIN_REQUEST: {
         return {
           isLoading: true,
           isSuccess: false,
         };
       }
-      case SIGNUP_SUCCESS: {
+      case LOGIN_SUCCESS: {
         return {
           isLoading: false,
           isSuccess: true,
         };
       }
-      case SIGNUP_FAILURE: {
+      case LOGIN_FAILURE: {
         return {
           isLoading: false,
           isSuccess: false,
@@ -31,4 +31,4 @@ const SignupReducer = (state = initialState, action) => {
     }
   };
   
-  export default SignupReducer;
+  export default LoginReducer;

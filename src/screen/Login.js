@@ -6,14 +6,19 @@ import {
   View,
   TextInput,
 } from "react-native";
-import { Colors } from '../component/Colors'
-// import AsyncStorage from "@react-native-community/async-storage";
+import { Colors } from "../component/Colors";
+import { LoginRequest } from "../redux/action/action";
+import { connect } from "react-redux";
 
-export default function Login(props) {
+const Login = (props) => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
-
+  const user = {
+    username: name,
+    password: password,
+    navigation: props.navigation,
+  };
 
   return (
     <View style={styles.Main}>
@@ -30,15 +35,13 @@ export default function Login(props) {
         value={password}
         onChangeText={(e) => setPassword(e)}
       />
-      <TouchableOpacity style={styles.button} >
+
+      <TouchableOpacity style={styles.button} onPress={() => props.Login(user)}>
         <Text style={styles.opacityText}> Sign In </Text>
-      </TouchableOpacity>
-      <TouchableOpacity  style={styles.Move} onPress={()=>props.navigation.navigate('Signup')}>
-        <Text style={styles.opacityText}> Dont have account? Signup </Text>
       </TouchableOpacity>
     </View>
   );
-}
+};
 const styles = StyleSheet.create({
   Main: {
     flex: 1,
@@ -64,10 +67,24 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginTop: 15,
   },
-  Move:{
-  marginTop:10
+  Move: {
+    marginTop: 10,
   },
-  opacityText:{
-      color:Colors.blue
-  }
+  opacityText: {
+    color: Colors.blue,
+  },
 });
+
+const mapStateToProps = (state) => {
+  return {
+    isLoading: state.isLoading,
+    isSuccess: state.isSuccess,
+  };
+};
+
+const mapdispatchToProps = (dispatch) => {
+  return {
+    Login: (user) => dispatch(LoginRequest(user)),
+  };
+};
+export default connect(mapStateToProps, mapdispatchToProps)(Login);
