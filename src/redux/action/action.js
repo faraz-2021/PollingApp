@@ -2,6 +2,9 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  ADDUSER_REQUEST,
+  ADDUSER_SUCCESS,
+  ADDUSER_FAILURE,
 } from "../constant/constant";
 export const LoginRequest = (user) => {
   return {
@@ -17,5 +20,21 @@ export const LoginSuccess = () => {
 export const LoginFailure = () => {
   return {
     type: LOGIN_FAILURE,
+  };
+};
+export const AddUserRequest = (user) => {
+  return {
+    type: ADDUSER_REQUEST,
+    user,
+  };
+};
+export const AddUserSuccess = () => {
+  return {
+    type: ADDUSER_SUCCESS,
+  };
+};
+export const AddUserFailure = () => {
+  return {
+    type: ADDUSER_FAILURE,
   };
 };
