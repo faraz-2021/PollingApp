@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   View,
   TextInput,
+  ActivityIndicator,
 } from "react-native";
 import { Colors } from "../component/Colors";
 import { LoginRequest } from "../redux/action/action";
@@ -18,18 +19,19 @@ const Login = (props) => {
     username: name,
     password: password,
     navigation: props.navigation,
+    isLoading: props.isLoading,
   };
 
   return (
     <View style={styles.Main}>
-      <Text style={styles.text}> User Name: </Text>
       <TextInput
+        placeholder=" User Name"
         style={styles.textInput}
         value={name}
         onChangeText={(e) => setName(e)}
       />
-      <Text style={styles.text}> Password: </Text>
       <TextInput
+        placeholder="Password"
         style={styles.textInput}
         secureTextEntry={true}
         value={password}
@@ -39,6 +41,9 @@ const Login = (props) => {
       <TouchableOpacity style={styles.button} onPress={() => props.Login(user)}>
         <Text style={styles.opacityText}> Sign In </Text>
       </TouchableOpacity>
+      {props.isLoading && props.isError ? (
+        <ActivityIndicator size="small" color={Colors.red} />
+      ) : null}
     </View>
   );
 };
@@ -47,38 +52,42 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#fff",
-
-    borderBottomColor: "#808080",
   },
   text: {
-    fontSize: 20,
+    fontSize: 30,
   },
   textInput: {
-    width: 250,
+    width: 300,
+    height: 50,
     borderWidth: 1,
+    borderRadius: 20,
+    fontSize: 20,
+    paddingLeft: 20,
+    marginTop: 20,
   },
   button: {
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 1,
-    width: 200,
+    width: 300,
     height: 50,
     borderRadius: 20,
-    marginTop: 15,
+    marginTop: 30,
+    backgroundColor: Colors.Blue,
   },
   Move: {
     marginTop: 10,
   },
   opacityText: {
-    color: Colors.blue,
+    color: Colors.white,
+    fontSize: 20,
   },
 });
 
 const mapStateToProps = (state) => {
   return {
-    isLoading: state.isLoading,
-    isSuccess: state.isSuccess,
+    isLoading: state.LoginReducer.isLoading,
+    isError: state.LoginReducer.isError,
   };
 };
 
