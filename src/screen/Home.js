@@ -9,11 +9,16 @@ import {
 import Feather from "react-native-vector-icons/Feather";
 import { connect } from "react-redux";
 import AddUser from "./AddUser";
+import FontAwesome from "react-native-vector-icons/FontAwesome5";
+import Constants from "expo-constants";
+
 function Feed({ navigation }) {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Welcome</Text>
-      <Button title="Open drawer" onPress={() => navigation.openDrawer()} />
+    <View style={styles.flex}>
+      <TouchableOpacity onPress={() => navigation.openDrawer()}>
+        <FontAwesome name="bars" size={30} />
+      </TouchableOpacity>
+      <Text style={{ fontSize: 20 }}>Home</Text>
     </View>
   );
 }
@@ -145,7 +150,12 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-between",
   },
-  signout: {},
+  flex: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 20,
+    marginTop: Constants.statusBarHeight,
+  },
 });
 
 const mapStateToProps = (state) => {
