@@ -9,15 +9,15 @@ export const LoginRequest = (user) => {
     user,
   };
 };
-export const LoginSuccess = (user) => {
+export const LoginSuccess = () => {
   return {
     type: LOGIN_SUCCESS,
-    user,
+    
   };
 };
-export const LoginFailure = (user) => {
+export const LoginFailure = () => {
   return {
     type: LOGIN_FAILURE,
-    user,
+    
   };
 };

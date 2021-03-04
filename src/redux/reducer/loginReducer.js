@@ -8,7 +8,6 @@ const initialState = {
   isLoading: false,
   isSuccess: false,
   isError: false,
-  data: "",
 };
 
 const LoginReducer = (state = initialState, action) => {
@@ -16,29 +15,23 @@ const LoginReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_REQUEST: {
       return {
-        ...state,
         isLoading: true,
         isSuccess: false,
         isError: false,
-        data: "",
       };
     }
     case LOGIN_SUCCESS: {
       return {
-        ...state,
         isLoading: false,
         isSuccess: true,
         isError: false,
-        data: action.user,
       };
     }
     case LOGIN_FAILURE: {
       return {
-        ...state,
         isLoading: false,
         isSuccess: false,
         isError: true,
-        data: action.user.username,
       };
     }
     default:

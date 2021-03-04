@@ -25,7 +25,7 @@ const Login = (props) => {
   return (
     <View style={styles.Main}>
       <TextInput
-        placeholder=" User Name"
+        placeholder="Username"
         style={styles.textInput}
         value={name}
         onChangeText={(e) => setName(e)}
@@ -41,7 +41,7 @@ const Login = (props) => {
       <TouchableOpacity style={styles.button} onPress={() => props.Login(user)}>
         <Text style={styles.opacityText}> Sign In </Text>
       </TouchableOpacity>
-      {props.isLoading && props.isError ? (
+      {props.isLoading ? (
         <ActivityIndicator size="small" color={Colors.red} />
       ) : null}
     </View>

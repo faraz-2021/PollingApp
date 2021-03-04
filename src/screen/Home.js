@@ -8,7 +8,7 @@ import {
 } from "@react-navigation/drawer";
 import Feather from "react-native-vector-icons/Feather";
 import { connect } from "react-redux";
-
+import AddUser from "./AddUser";
 function Feed({ navigation }) {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -18,13 +18,6 @@ function Feed({ navigation }) {
   );
 }
 
-function AddUser() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Add User</Text>
-    </View>
-  );
-}
 function AllUser() {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -102,7 +95,6 @@ const Home = (props) => {
       setName(id);
     })();
   }, []);
-  console.log(name, "userrrrrr");
 
   const clearAsyncStorage = async () => {
     await AsyncStorage.clear();
@@ -160,7 +152,6 @@ const mapStateToProps = (state) => {
   return {
     isLoading: state.LoginReducer.isLoading,
     isSuccess: state.LoginReducer.isSuccess,
-    user: state.LoginReducer.data.user,
   };
 };
 export default connect(mapStateToProps)(Home);

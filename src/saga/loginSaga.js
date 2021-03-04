@@ -21,12 +21,19 @@ export function* Login(action) {
 
               action.user.navigation.navigate("Home");
             }
+            Token = await AsyncStorage.getItem("token");
           });
       });
-      let user = action.user.username;
-      yield put(LoginSuccess({ response: response, user: user }));
-    } catch (err) {}
+      if (Token) {
+        yield put(LoginSuccess(Token));
+      } else {
+        yield put(LoginFailure({ error: "invalid user" }));
+      }
+    } catch (err) {
+      yield put(LoginFailure({ err: "invalid user" }));
+    }
   } else {
     alert("Fields can't be empty");
+    yield put(LoginFailure({ error: "invalid user" }));
   }
 }
