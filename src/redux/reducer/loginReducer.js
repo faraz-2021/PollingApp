@@ -11,7 +11,6 @@ const initialState = {
 };
 
 const LoginReducer = (state = initialState, action) => {
-  console.log(action.type, "kkkkk");
   switch (action.type) {
     case LOGIN_REQUEST: {
       return {

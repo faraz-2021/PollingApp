@@ -19,7 +19,6 @@ const Login = (props) => {
     username: name,
     password: password,
     navigation: props.navigation,
-    isLoading: props.isLoading,
   };
 
   return (

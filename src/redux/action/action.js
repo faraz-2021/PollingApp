@@ -12,12 +12,10 @@ export const LoginRequest = (user) => {
 export const LoginSuccess = () => {
   return {
     type: LOGIN_SUCCESS,
-    
   };
 };
 export const LoginFailure = () => {
   return {
     type: LOGIN_FAILURE,
-    
   };
 };
