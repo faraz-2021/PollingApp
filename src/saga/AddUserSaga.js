@@ -1,9 +1,15 @@
 import axios from "axios";
 import { call, put } from "redux-saga/effects";
-import { AddUserSuccess, AddUserFailure } from "../redux/action/action";
+import {
+  AddUserSuccess,
+  AddUserFailure,
+  GetUser,
+} from "../redux/action/action";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { GET_USER } from "../redux/constant/constant";
 
 export function* AddUser(action) {
+  let Token = "";
   if (
     action.user.username.length > 0 &&
     action.user.password.length > 0 &&
@@ -31,6 +37,7 @@ export function* AddUser(action) {
             Token = await AsyncStorage.getItem("token");
           });
       });
+      yield put({ type: GET_USER, GetUser });
       if (Token) {
         yield put(AddUserSuccess(Token));
       } else {
