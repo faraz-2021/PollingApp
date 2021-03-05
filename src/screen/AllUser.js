@@ -25,7 +25,7 @@ const AllUser = (props) => {
         <Text style={{ fontSize: 20 }}>All User</Text>
       </View>
       <FlatList
-        data={props.data}
+        data={props.allUser}
         contentContainerStyle={styles.list}
         contentContainerStyle={styles.list}
         renderItem={({ item }) => (
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    data: state.GetUser.data,
+    allUser: state.GetUser.data,
   };
 };
 
