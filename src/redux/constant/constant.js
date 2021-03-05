@@ -8,3 +8,6 @@ export const ADDUSER_FAILURE = "ADDUSER_FAILURE";
 
 export const GET_USER = "GET_USER";
 export const USER_RECIEVED = "USER_RECIEVED";
+
+export const GET_POLLS = "GET_POLLS";
+export const POLLS_RECIEVED = "POLLS_RECIEVED";

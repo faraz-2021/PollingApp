@@ -12,7 +12,7 @@ import AddUser from "./AddUser";
 import FontAwesome from "react-native-vector-icons/FontAwesome5";
 import Constants from "expo-constants";
 import AllUser from "./AllUser";
-import { GetUser } from "../redux/action/action";
+import AllPolls from "./allPolls";
 
 function Feed({ navigation }) {
   return (
@@ -29,20 +29,6 @@ function AddPolls() {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Text>Add Polls</Text>
-    </View>
-  );
-}
-function AllPolls(props) {
-  const clearAsyncStorage = async () => {
-    await AsyncStorage.clear();
-    props.navigation.navigate("Login");
-  };
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>All Polls</Text>
-      <TouchableOpacity onPress={clearAsyncStorage} style={styles.button}>
-        <Text>sign Out</Text>
-      </TouchableOpacity>
     </View>
   );
 }

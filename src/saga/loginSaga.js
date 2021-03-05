@@ -4,11 +4,10 @@ import { LoginSuccess, LoginFailure } from "../redux/action/action";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { environment } from "../../envrionment";
 
-
 export function* Login(action) {
   if (action.user.username.length > 0 && action.user.password.length > 0) {
     try {
-       yield call(async () => {
+      yield call(async () => {
         await axios
           .get(
             `${environment.apiBase}/login?username=${action.user.username}&password=${action.user.password}`

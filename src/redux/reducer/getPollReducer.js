@@ -1,4 +1,4 @@
-import { GET_USER, USER_RECIEVED } from "../constant/constant";
+import { GET_POLLS, POLLS_RECIEVED } from "../constant/constant";
 
 const initialState = {
   isLoading: false,
@@ -6,16 +6,16 @@ const initialState = {
   data: {},
 };
 
-const GetUserReducer = (state = initialState, action) => {
+const getPollReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_USER: {
+    case GET_POLLS: {
       return {
         isLoading: true,
 
         data: {},
       };
     }
-    case USER_RECIEVED: {
+    case POLLS_RECIEVED: {
       return {
         isLoading: false,
 
@@ -27,4 +27,4 @@ const GetUserReducer = (state = initialState, action) => {
   }
 };
 
-export default GetUserReducer;
+export default getPollReducer;
