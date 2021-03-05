@@ -13,7 +13,7 @@ import { GetUser } from "../redux/action/action";
 
 const AllUser = (props) => {
   useEffect(() => {
-    props.get();
+    props.getUser();
   }, []);
 
   return (
@@ -94,7 +94,7 @@ const mapStateToProps = (state) => {
 
 const mapdispatchToProps = (dispatch) => {
   return {
-    get: () => dispatch(GetUser()),
+    getUser: () => dispatch(GetUser()),
   };
 };
 
