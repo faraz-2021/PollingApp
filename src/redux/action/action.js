@@ -6,7 +6,7 @@ import {
   ADDUSER_SUCCESS,
   ADDUSER_FAILURE,
   GET_USER,
-  GETTING_USER,
+  USER_RECIEVED,
 } from "../constant/constant";
 export const LoginRequest = (user) => {
   return {
@@ -47,9 +47,9 @@ export const GetUser = () => {
   };
 };
 
-export const GettingUser = (user) => {
+export const UserReceived = (user) => {
   return {
-    type: GETTING_USER,
+    type: USER_RECIEVED,
     user,
   };
 };

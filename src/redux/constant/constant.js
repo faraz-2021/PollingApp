@@ -7,4 +7,4 @@ export const ADDUSER_SUCCESS = "ADDUSER_SUCCESS";
 export const ADDUSER_FAILURE = "ADDUSER_FAILURE";
 
 export const GET_USER = "GET_USER";
-export const GETTING_USER = "GETTING_USER";
+export const USER_RECIEVED = "USER_RECIEVED";

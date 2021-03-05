@@ -12,9 +12,8 @@ import Constants from "expo-constants";
 import { GetUser } from "../redux/action/action";
 
 const AllUser = (props) => {
-  console.log(props.data, "dataaaaaaaa");
   useEffect(() => {
-    props.Get();
+    props.get();
   }, []);
 
   return (
@@ -95,7 +94,7 @@ const mapStateToProps = (state) => {
 
 const mapdispatchToProps = (dispatch) => {
   return {
-    Get: () => dispatch(GetUser()),
+    get: () => dispatch(GetUser()),
   };
 };
 
