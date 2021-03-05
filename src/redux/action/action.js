@@ -7,6 +7,8 @@ import {
   ADDUSER_FAILURE,
   GET_USER,
   USER_RECIEVED,
+  GET_POLLS,
+  POLLS_RECIEVED,
 } from "../constant/constant";
 export const LoginRequest = (user) => {
   return {
@@ -50,6 +52,19 @@ export const GetUser = () => {
 export const UserReceived = (user) => {
   return {
     type: USER_RECIEVED,
+    user,
+  };
+};
+
+export const getPolls = () => {
+  return {
+    type: GET_POLLS,
+  };
+};
+
+export const pollsReceived = (user) => {
+  return {
+    type: POLLS_RECIEVED,
     user,
   };
 };
