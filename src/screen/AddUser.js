@@ -69,7 +69,7 @@ const AddUser = (props) => {
           >
             <Picker.Item label="Select role" value="0" />
             <Picker.Item label="admin" value="admin" />
-            <Picker.Item label="guest" value="admin" />
+            <Picker.Item label="guest" value="guest" />
           </Picker>
         </View>
         <TouchableOpacity

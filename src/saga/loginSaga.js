@@ -2,6 +2,8 @@ import axios from "axios";
 import { call, put } from "redux-saga/effects";
 import { LoginSuccess, LoginFailure } from "../redux/action/action";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { environment } from "../../envrionment";
+
 
 export function* Login(action) {
   if (action.user.username.length > 0 && action.user.password.length > 0) {
@@ -9,7 +11,7 @@ export function* Login(action) {
        yield call(async () => {
         await axios
           .get(
-            `https://secure-refuge-14993.herokuapp.com/login?username=${action.user.username}&password=${action.user.password}`
+            `${environment.apiBase}/login?username=${action.user.username}&password=${action.user.password}`
           )
           .then(async (res) => {
             if (res.data.error) {

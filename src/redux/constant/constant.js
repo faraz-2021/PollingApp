@@ -5,3 +5,6 @@ export const LOGIN_FAILURE = "LOGIN_FAILURE";
 export const ADDUSER_REQUEST = "ADDUSER_REQUEST";
 export const ADDUSER_SUCCESS = "ADDUSER_SUCCESS";
 export const ADDUSER_FAILURE = "ADDUSER_FAILURE";
+
+export const GET_USER = "GET_USER";
+export const USER_RECIEVED = "USER_RECIEVED";

@@ -5,6 +5,8 @@ import {
   ADDUSER_REQUEST,
   ADDUSER_SUCCESS,
   ADDUSER_FAILURE,
+  GET_USER,
+  USER_RECIEVED,
 } from "../constant/constant";
 export const LoginRequest = (user) => {
   return {
@@ -36,5 +38,18 @@ export const AddUserSuccess = () => {
 export const AddUserFailure = () => {
   return {
     type: ADDUSER_FAILURE,
+  };
+};
+
+export const GetUser = () => {
+  return {
+    type: GET_USER,
+  };
+};
+
+export const UserReceived = (user) => {
+  return {
+    type: USER_RECIEVED,
+    user,
   };
 };

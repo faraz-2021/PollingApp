@@ -1,9 +1,16 @@
 import axios from "axios";
 import { call, put } from "redux-saga/effects";
-import { AddUserSuccess, AddUserFailure } from "../redux/action/action";
+import {
+  AddUserSuccess,
+  AddUserFailure,
+  GetUser,
+} from "../redux/action/action";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { GET_USER } from "../redux/constant/constant";
+import { environment } from "../../envrionment";
 
 export function* AddUser(action) {
+  let token = "";
   if (
     action.user.username.length > 0 &&
     action.user.password.length > 0 &&
@@ -13,7 +20,7 @@ export function* AddUser(action) {
       yield call(async () => {
         await axios
           .get(
-            `https://secure-refuge-14993.herokuapp.com/add_user?username=${action.user.username}&password=${action.user.password}&role=${action.user.role}`
+            `${environment.apiBase}/add_user?username=${action.user.username}&password=${action.user.password}&role=${action.user.role}`
           )
           .then(async (res) => {
             if (res.data.error) {
@@ -28,11 +35,12 @@ export function* AddUser(action) {
               action.user.setRole(null);
             }
 
-            Token = await AsyncStorage.getItem("token");
+            token = await AsyncStorage.getItem("token");
           });
       });
-      if (Token) {
-        yield put(AddUserSuccess(Token));
+      yield put({ type: GET_USER, GetUser });
+      if (token) {
+        yield put(AddUserSuccess(token));
       } else {
         yield put(AddUserFailure({ error: "invalid user" }));
       }

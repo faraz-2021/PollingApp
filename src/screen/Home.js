@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Button, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   createDrawerNavigator,
@@ -11,6 +11,8 @@ import { connect } from "react-redux";
 import AddUser from "./AddUser";
 import FontAwesome from "react-native-vector-icons/FontAwesome5";
 import Constants from "expo-constants";
+import AllUser from "./AllUser";
+import { GetUser } from "../redux/action/action";
 
 function Feed({ navigation }) {
   return (
@@ -23,13 +25,6 @@ function Feed({ navigation }) {
   );
 }
 
-function AllUser() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>All User</Text>
-    </View>
-  );
-}
 function AddPolls() {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -69,7 +64,9 @@ function CustomDrawerContent(props) {
             />
             <DrawerItem
               label="All Users"
-              onPress={() => props.navigation.navigate("AllUser")}
+              onPress={() => {
+                props.navigation.navigate("AllUser");
+              }}
             />
             <DrawerItem
               label="Add Poll"
@@ -164,4 +161,5 @@ const mapStateToProps = (state) => {
     isSuccess: state.LoginReducer.isSuccess,
   };
 };
+
 export default connect(mapStateToProps)(Home);
