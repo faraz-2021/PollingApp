@@ -25,8 +25,8 @@ const AddPolls = (props) => {
   const user = {
     "title": poll,
    "options": option,
-   setPoll:setPoll,
-   setOption:setOption
+   "setPoll":setPoll,
+   "setOption":setOption
   };
 
   const addOption = () => {

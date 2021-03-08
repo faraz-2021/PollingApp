@@ -9,23 +9,23 @@ import { GET_POLLS } from "../redux/constant/constant";
 import { environment } from "../../envrionment";
 
 export function* AddPoll(action) {
-  let option = "";
-  action.user.options.forEach((a, index) => {
-    option = option.concat(!index ? a.title : `____${a.title}`);
-  });
   let response = "";
-  if (action.user.title.length > 0 && option.length > 0) {
+  if (action.user.title.length > 0 && action.user.options.length > 0) {
+    let option = "";
+    action.user.options.forEach((a, index) => {
+      option = option.concat(!index ? a.title : `____${a.title}`);
+    });
     try {
       yield call(async () => {
         await axios
           .get(
-            `${environment.apiBase}/add_poll?title=${action.user.title}%20&options=${option}`
+            `${environment.apiBase}/add_poll?title=${action.user.title}&options=${option}`
           )
           .then(async (res) => {
             response = res;
             alert("Poll added successfully");
-            action.user.setPoll(null);
-            action.user.setOption(null)
+            action.user.setPoll('');
+            action.user.setOption([]);
           });
       });
 
