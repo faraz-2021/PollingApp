@@ -8,6 +8,7 @@ import {
   TextInput,
   FlatList,
   ScrollView,
+  ActivityIndicator,
 } from "react-native";
 import Constants from "expo-constants";
 import FontAwesome from "react-native-vector-icons/FontAwesome5";
@@ -22,8 +23,10 @@ const AddPolls = (props) => {
   const [option, setOption] = useState([]);
 
   const user = {
-    title: poll,
-    options: option,
+    "title": poll,
+   "options": option,
+   setPoll:setPoll,
+   setOption:setOption
   };
 
   const addOption = () => {
@@ -115,6 +118,9 @@ const AddPolls = (props) => {
           >
             <Text style={styles.btn}>ADD POLL</Text>
           </TouchableOpacity>
+          {props.isLoading ? (
+            <ActivityIndicator size="small" color={Colors.red} />
+          ) : null}
         </View>
       </ScrollView>
     </View>
@@ -176,9 +182,15 @@ const styles = StyleSheet.create({
   },
 });
 
+const mapStateToProps = (state) => {
+  return {
+    isLoading: state.AddPoll.isLoading,
+  };
+};
+
 const mapdispatchToProps = (dispatch) => {
   return {
     addPoll: (user) => dispatch(addPoll(user)),
   };
 };
-export default connect(null, mapdispatchToProps)(AddPolls);
+export default connect(mapStateToProps, mapdispatchToProps)(AddPolls);

@@ -15,3 +15,7 @@ export const POLLS_RECIEVED = "POLLS_RECIEVED";
 export const ADDPOLL_REQUEST = "ADDPOLL_REQUEST";
 export const ADDPOLL_SUCCESS = "ADDPOLL_SUCCESS";
 export const ADDPOLL_FAILURE = "ADDPOLL_FAILURE";
+
+export const ADD_POLL = "ADD_POLL"
+export const ADD_OPTION = "ADD_OPTION"
+

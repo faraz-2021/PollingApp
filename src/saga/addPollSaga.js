@@ -5,7 +5,6 @@ import {
   addPollFailure,
   getPolls,
 } from "../redux/action/action";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { GET_POLLS } from "../redux/constant/constant";
 import { environment } from "../../envrionment";
 
@@ -14,30 +13,34 @@ export function* AddPoll(action) {
   action.user.options.forEach((a, index) => {
     option = option.concat(!index ? a.title : `____${a.title}`);
   });
-  let token = "";
-  if (action.user.title) {
+  let response = "";
+  if (action.user.title.length > 0 && option.length > 0) {
     try {
       yield call(async () => {
         await axios
           .get(
-            `${environment.apiBase}/add_poll?title=${action.user.title}%20polll&options=${option}`
+            `${environment.apiBase}/add_poll?title=${action.user.title}%20&options=${option}`
           )
           .then(async (res) => {
-
-            token = await AsyncStorage.getItem("token");
+            response = res;
+            alert("Poll added successfully");
+            action.user.setPoll(null);
+            action.user.setOption(null)
           });
       });
+
       yield put({ type: GET_POLLS, getPolls });
 
-      if (token) {
-        yield put(addPollSucces(token));
+      if (response) {
+        yield put(addPollSucces(response));
       } else {
         yield put(addPollFailure({ error: "invalid user" }));
       }
     } catch (err) {
-      yield put(addPollFailure({ err: "invalid user" }));
+      console.error(err);
     }
   } else {
-    alert("Poll can't be empty");
+    alert("Poll & Options can't be empty");
+    yield put(addPollFailure({ err: "invalid user" }));
   }
 }

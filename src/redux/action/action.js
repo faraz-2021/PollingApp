@@ -12,6 +12,8 @@ import {
   ADDPOLL_REQUEST,
   ADDPOLL_SUCCESS,
   ADDPOLL_FAILURE,
+  ADD_POLL,
+  ADD_OPTION
 } from "../constant/constant";
 export const LoginRequest = (user) => {
   return {
@@ -88,3 +90,16 @@ export const addPollFailure = () => {
     type: ADDPOLL_FAILURE,
   };
 };
+
+export const addPolls = (user) =>{
+  return {
+    type: ADD_POLL,
+    user
+  };
+}
+
+export const addOption = () =>{
+  return {
+    type: ADD_POLL,
+  };
+}
