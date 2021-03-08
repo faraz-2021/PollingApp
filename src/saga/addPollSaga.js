@@ -14,7 +14,6 @@ export function* AddPoll(action) {
   action.user.options.forEach((a, index) => {
     option = option.concat(!index ? a.title : `____${a.title}`);
   });
-  console.log(option, "fljflksajfl");
   let token = "";
   if (action.user.title) {
     try {
@@ -24,7 +23,6 @@ export function* AddPoll(action) {
             `${environment.apiBase}/add_poll?title=${action.user.title}%20polll&options=${option}`
           )
           .then(async (res) => {
-            console.log(res, "respomsnskjs");
 
             token = await AsyncStorage.getItem("token");
           });
