@@ -9,6 +9,9 @@ import {
   USER_RECIEVED,
   GET_POLLS,
   POLLS_RECIEVED,
+  ADDPOLL_REQUEST,
+  ADDPOLL_SUCCESS,
+  ADDPOLL_FAILURE,
 } from "../constant/constant";
 export const LoginRequest = (user) => {
   return {
@@ -66,5 +69,22 @@ export const pollsReceived = (user) => {
   return {
     type: POLLS_RECIEVED,
     user,
+  };
+};
+
+export const addPoll = (user) => {
+  return {
+    type: ADDPOLL_REQUEST,
+    user,
+  };
+};
+export const addPollSucces = () => {
+  return {
+    type: ADDPOLL_SUCCESS,
+  };
+};
+export const addPollFailure = () => {
+  return {
+    type: ADDPOLL_FAILURE,
   };
 };

@@ -13,6 +13,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome5";
 import Constants from "expo-constants";
 import AllUser from "./AllUser";
 import AllPolls from "./allPolls";
+import AddPolls from './addPoll'
 
 function Feed({ navigation }) {
   return (
@@ -25,13 +26,7 @@ function Feed({ navigation }) {
   );
 }
 
-function AddPolls() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Add Polls</Text>
-    </View>
-  );
-}
+
 
 function CustomDrawerContent(props) {
   return (
