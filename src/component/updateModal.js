@@ -11,9 +11,9 @@ import {
 import { Colors } from "../component/Colors";
 
 const UpdateModal = (props) => {
-  const [text, setText] = useState(props.modalVisible.title);
+  const [text, setText] = useState(props.title);
   const user = {
-    id: props.modalVisible.id,
+    id: props.id,
     title: text,
   };
 
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     height: 100,
     width: 280,
     borderRadius: 10,
-    backgroundColor:Colors.sparkBlue,
+    backgroundColor: Colors.sparkBlue,
   },
   flex: {
     flexDirection: "row",

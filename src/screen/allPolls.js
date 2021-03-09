@@ -20,7 +20,8 @@ import { updatePoll } from "../redux/action/action";
 import UpdateModal from "../component/updateModal";
 
 const AllPolls = (props) => {
-  const [modalVisible, setModalVisible] = useState({});
+  const [id, setId] = useState("");
+  const [title, setTitle] = useState("");
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -44,7 +45,8 @@ const AllPolls = (props) => {
   };
 
   const handleCLick = (id, title) => {
-    setModalVisible({ ...modalVisible, id: id, title: title });
+    setModalVisible(id);
+    setTitle(title);
   };
 
   return (
@@ -90,7 +92,8 @@ const AllPolls = (props) => {
       </View>
       {open ? (
         <UpdateModal
-          modalVisible={modalVisible}
+          id={id}
+          title={title}
           updatePoll={props.updatePoll}
           setOpen={setOpen}
           open={open}
