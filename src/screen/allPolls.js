@@ -20,11 +20,7 @@ import { updatePoll } from "../redux/action/action";
 import UpdateModal from "../component/updateModal";
 
 const AllPolls = (props) => {
-  const [modalVisible, setModalVisible] = useState({
-    status: false,
-    id: "",
-    title: "",
-  });
+  const [modalVisible, setModalVisible] = useState({});
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -48,7 +44,7 @@ const AllPolls = (props) => {
   };
 
   const handleCLick = (id, title) => {
-    setModalVisible({ ...modalVisible, status: true, id: id, title: title });
+    setModalVisible({ ...modalVisible, id: id, title: title });
   };
 
   return (
@@ -162,8 +158,8 @@ const styles = StyleSheet.create({
   innerView: {
     borderRadius: 20,
     padding: 15,
-    backgroundColor: "#fff",
-    shadowColor: "#000",
+    backgroundColor: Colors.white,
+    shadowColor: Colors.black,
     shadowOffset: {
       width: 0,
       height: 2,

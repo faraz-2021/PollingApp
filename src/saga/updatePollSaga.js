@@ -13,7 +13,6 @@ export function* updatePoll(action) {
         );
         return result;
       });
-      console.log(response, "sjdsjhlk");
       if (response.data.error) {
         alert(response.data.data);
       } else {
@@ -25,6 +24,6 @@ export function* updatePoll(action) {
       console.error(err);
     }
   } else {
-    alert("Poll cant be empty");
+    alert("Poll can't be empty");
   }
 }

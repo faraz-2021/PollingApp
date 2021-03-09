@@ -8,6 +8,7 @@ import {
   ActivityIndicator,
   TouchableOpacity,
 } from "react-native";
+import { Colors } from "../component/Colors";
 
 const UpdateModal = (props) => {
   const [text, setText] = useState(props.modalVisible.title);
@@ -74,11 +75,11 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    backgroundColor: "white",
+    backgroundColor: Colors.white,
     borderRadius: 20,
     padding: 35,
     alignItems: "center",
-    shadowColor: "#000",
+    shadowColor: Colors.black,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -94,14 +95,9 @@ const styles = StyleSheet.create({
     padding: 10,
     elevation: 2,
   },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
-  },
-  buttonClose: {
-    backgroundColor: "#2196F3",
-  },
+
   textStyle: {
-    color: "white",
+    color: Colors.white,
     fontWeight: "bold",
     textAlign: "center",
   },
@@ -113,7 +109,7 @@ const styles = StyleSheet.create({
     height: 100,
     width: 280,
     borderRadius: 10,
-    backgroundColor: "#F5FCFF",
+    backgroundColor:Colors.sparkBlue,
   },
   flex: {
     flexDirection: "row",

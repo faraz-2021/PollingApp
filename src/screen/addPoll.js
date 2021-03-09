@@ -23,10 +23,10 @@ const AddPolls = (props) => {
   const [option, setOption] = useState([]);
 
   const user = {
-    "title": poll,
-   "options": option,
-   "setPoll":setPoll,
-   "setOption":setOption
+    title: poll,
+    options: option,
+    setPoll: setPoll,
+    setOption: setOption,
   };
 
   const addOption = () => {
@@ -35,7 +35,7 @@ const AddPolls = (props) => {
         return [...option, { title: text, id: Math.random().toString() }];
       });
     } else {
-      alert("option cant be empty");
+      alert("option can't be empty");
     }
   };
 
@@ -136,25 +136,20 @@ const styles = StyleSheet.create({
     padding: 20,
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: "#23395d",
+    backgroundColor: Colors.acBlue,
   },
-  textareaContainer: {
-    height: 180,
-    width: 350,
-    padding: 5,
-    backgroundColor: "#F5FCFF",
-  },
+
   textarea: {
     textAlignVertical: "top",
     fontSize: 14,
-    color: "#333",
+    color: Colors.White,
     height: 180,
     width: 350,
     padding: 5,
-    backgroundColor: "#F5FCFF",
+    backgroundColor: Colors.sparkBlue,
   },
   button: {
-    backgroundColor: "#23395d",
+    backgroundColor: Colors.acBlue,
     justifyContent: "center",
     alignItems: "center",
     width: 150,
@@ -168,7 +163,7 @@ const styles = StyleSheet.create({
     color: Colors.white,
   },
   AddBtn: {
-    backgroundColor: "#23395d",
+    backgroundColor: Colors.acBlue,
     justifyContent: "center",
     alignItems: "center",
     width: 100,
