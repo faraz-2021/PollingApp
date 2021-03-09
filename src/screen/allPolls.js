@@ -16,8 +16,17 @@ import PollData from "../component/pollData";
 import { Colors } from "../component/Colors";
 import Material from "react-native-vector-icons/MaterialCommunityIcons";
 import { deletePoll } from "../redux/action/action";
+import { updatePoll } from "../redux/action/action";
+import UpdateModal from "../component/updateModal";
 
 const AllPolls = (props) => {
+  const [modalVisible, setModalVisible] = useState({
+    status: false,
+    id: "",
+    title: "",
+  });
+  const [open, setOpen] = useState(false);
+
   useEffect(() => {
     props.getPolls();
   }, []);
@@ -38,6 +47,10 @@ const AllPolls = (props) => {
     );
   };
 
+  const handleCLick = (id, title) => {
+    setModalVisible({ ...modalVisible, status: true, id: id, title: title });
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.flex}>
@@ -52,12 +65,18 @@ const AllPolls = (props) => {
       <View>
         <FlatList
           data={props.allPolls}
-          contentContainerStyle={{}}
           renderItem={({ item, index }) => (
             <View>
               <View style={styles.data}>
                 <Text style={styles.text1}>{index + 1}:</Text>
-                <Text style={styles.text2}>{item.title}</Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    setOpen(true);
+                    handleCLick(item._id, item.title);
+                  }}
+                >
+                  <Text style={styles.text2}>{item.title}</Text>
+                </TouchableOpacity>
 
                 <TouchableOpacity
                   style={{ marginRight: 20 }}
@@ -73,6 +92,18 @@ const AllPolls = (props) => {
           keyExtractor={(item) => item._id}
         />
       </View>
+      {open ? (
+        <UpdateModal
+          modalVisible={modalVisible}
+          updatePoll={props.updatePoll}
+          setOpen={setOpen}
+          open={open}
+          isLoading={props.isLoading}
+        />
+      ) : null}
+      {props.Loading ? (
+        <ActivityIndicator size="small" color={Colors.red} />
+      ) : null}
     </View>
   );
 };
@@ -146,7 +177,9 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
   return {
     allPolls: state.GetPoll.data,
+    Loading: state.GetPoll.isLoading,
     isLoading: state.DeletePoll.isLoading,
+    isLoading: state.UpdatePoll.isLoading,
   };
 };
 
@@ -154,6 +187,7 @@ const mapdispatchToProps = (dispatch) => {
   return {
     getPolls: () => dispatch(getPolls()),
     deletePoll: (user) => dispatch(deletePoll(user)),
+    updatePoll: (user) => dispatch(updatePoll(user)),
   };
 };
 export default connect(mapStateToProps, mapdispatchToProps)(AllPolls);

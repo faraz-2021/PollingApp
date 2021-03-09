@@ -13,20 +13,19 @@ import FontAwesome from "react-native-vector-icons/FontAwesome5";
 import Constants from "expo-constants";
 import AllUser from "./AllUser";
 import AllPolls from "./allPolls";
-import AddPolls from './addPoll'
-
+import AddPolls from "./addPoll";
 function Feed({ navigation }) {
   return (
-    <View style={styles.flex}>
-      <TouchableOpacity onPress={() => navigation.openDrawer()}>
-        <FontAwesome name="bars" size={30} />
-      </TouchableOpacity>
-      <Text style={{ fontSize: 20 }}>Home</Text>
+    <View>
+      <View style={styles.flex}>
+        <TouchableOpacity onPress={() => navigation.openDrawer()}>
+          <FontAwesome name="bars" size={30} />
+        </TouchableOpacity>
+        <Text style={{ fontSize: 20 }}>Home</Text>
+      </View>
     </View>
   );
 }
-
-
 
 function CustomDrawerContent(props) {
   return (
@@ -57,7 +56,6 @@ function CustomDrawerContent(props) {
               label="All Polls"
               onPress={() => props.navigation.navigate("AllPoll")}
             />
-            
           </View>
         </View>
 
@@ -101,7 +99,6 @@ const Home = (props) => {
       <Drawer.Screen name="AllUser" component={AllUser} />
       <Drawer.Screen name="AddPoll" component={AddPolls} />
       <Drawer.Screen name="AllPoll" component={AllPolls} />
-
     </Drawer.Navigator>
   );
 };

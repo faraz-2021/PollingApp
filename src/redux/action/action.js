@@ -14,6 +14,8 @@ import {
   ADDPOLL_FAILURE,
   DELETEPOLL_REQUEST,
   DELETEPOLL_SUCCESS,
+  UPDATE_POLL,
+  POLL_UPDATED,
 } from "../constant/constant";
 export const LoginRequest = (user) => {
   return {
@@ -101,5 +103,18 @@ export const deletePoll = (user) => {
 export const deletePollSuccess = () => {
   return {
     type: DELETEPOLL_SUCCESS,
+  };
+};
+
+export const updatePoll = (user) => {
+  return {
+    type: UPDATE_POLL,
+    user,
+  };
+};
+
+export const pollUpdated = () => {
+  return {
+    type: POLL_UPDATED,
   };
 };
