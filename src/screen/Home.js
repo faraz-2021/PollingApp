@@ -57,6 +57,7 @@ function CustomDrawerContent(props) {
               label="All Polls"
               onPress={() => props.navigation.navigate("AllPoll")}
             />
+            
           </View>
         </View>
 
@@ -100,6 +101,7 @@ const Home = (props) => {
       <Drawer.Screen name="AllUser" component={AllUser} />
       <Drawer.Screen name="AddPoll" component={AddPolls} />
       <Drawer.Screen name="AllPoll" component={AllPolls} />
+
     </Drawer.Navigator>
   );
 };

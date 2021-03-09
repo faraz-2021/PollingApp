@@ -12,8 +12,8 @@ import {
   ADDPOLL_REQUEST,
   ADDPOLL_SUCCESS,
   ADDPOLL_FAILURE,
-  ADD_POLL,
-  ADD_OPTION
+  DELETEPOLL_REQUEST,
+  DELETEPOLL_SUCCESS,
 } from "../constant/constant";
 export const LoginRequest = (user) => {
   return {
@@ -91,15 +91,15 @@ export const addPollFailure = () => {
   };
 };
 
-export const addPolls = (user) =>{
+export const deletePoll = (user) => {
   return {
-    type: ADD_POLL,
-    user
+    type: DELETEPOLL_REQUEST,
+    user,
   };
-}
+};
 
-export const addOption = () =>{
+export const deletePollSuccess = () => {
   return {
-    type: ADD_POLL,
+    type: DELETEPOLL_SUCCESS,
   };
-}
+};

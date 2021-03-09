@@ -4,6 +4,7 @@ import AddUserReducer from "../reducer/AddUserReducer";
 import GetUserReducer from "../reducer/GetUserReducer";
 import getPollReducer from "../reducer/getPollReducer";
 import AddPollReducer from '../reducer/addPollReducer';
+import DeletePollReducer from './deletePollReducer';
 
 
 const rootReducer = combineReducers({
@@ -11,7 +12,8 @@ const rootReducer = combineReducers({
   AddUser: AddUserReducer,
   GetUser: GetUserReducer,
   GetPoll:getPollReducer,
-  AddPoll:AddPollReducer
+  AddPoll:AddPollReducer,
+  DeletePoll:DeletePollReducer
 });
 
 export default rootReducer;

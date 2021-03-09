@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
   StyleSheet,
   FlatList,
   TouchableOpacity,
+  Alert,
+  ActivityIndicator,
 } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome5";
 import { connect } from "react-redux";
@@ -12,11 +14,29 @@ import Constants from "expo-constants";
 import { getPolls } from "../redux/action/action";
 import PollData from "../component/pollData";
 import { Colors } from "../component/Colors";
+import Material from "react-native-vector-icons/MaterialCommunityIcons";
+import { deletePoll } from "../redux/action/action";
 
 const AllPolls = (props) => {
   useEffect(() => {
     props.getPolls();
   }, []);
+
+  const deleteAlert = (id) => {
+    Alert.alert(
+      "Delete Poll",
+      "Confirm Delete",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        { text: "OK", onPress: () => props.deletePoll(id) },
+      ],
+      { cancelable: false }
+    );
+  };
 
   return (
     <View style={{ flex: 1 }}>
@@ -25,22 +45,34 @@ const AllPolls = (props) => {
           <FontAwesome name="bars" size={30} />
         </TouchableOpacity>
         <Text style={{ fontSize: 20 }}>All Polls</Text>
+        {props.isLoading ? (
+          <ActivityIndicator size="small" color={Colors.red} />
+        ) : null}
       </View>
+      <View>
+        <FlatList
+          data={props.allPolls}
+          contentContainerStyle={{}}
+          renderItem={({ item, index }) => (
+            <View>
+              <View style={styles.data}>
+                <Text style={styles.text1}>{index + 1}:</Text>
+                <Text style={styles.text2}>{item.title}</Text>
 
-      <FlatList
-        data={props.allPolls}
-        contentContainerStyle={{}}
-        renderItem={({ item, index }) => (
-          <View>
-            <View style={styles.data}>
-              <Text style={styles.text1}>{index + 1}:</Text>
-              <Text style={styles.text2}>{item.title}</Text>
+                <TouchableOpacity
+                  style={{ marginRight: 20 }}
+                  onPress={() => deleteAlert(item._id)}
+                >
+                  <Material name="delete" size={30} color={Colors.Blue} />
+                </TouchableOpacity>
+              </View>
+
+              <PollData item={item} />
             </View>
-            <PollData item={item} />
-          </View>
-        )}
-        keyExtractor={(item) => item._id}
-      />
+          )}
+          keyExtractor={(item) => item._id}
+        />
+      </View>
     </View>
   );
 };
@@ -81,8 +113,10 @@ const styles = StyleSheet.create({
     height: 40,
     alignItems: "center",
     backgroundColor: Colors.lightgray,
-    paddingLeft: 15,
+    paddingLeft: 20,
+    justifyContent: "space-between",
   },
+
   list: {
     justifyContent: "center",
     alignItems: "center",
@@ -94,17 +128,32 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     color: Colors.Blue,
   },
+  innerView: {
+    borderRadius: 20,
+    padding: 15,
+    backgroundColor: "#fff",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+    elevation: 5,
+  },
 });
 
 const mapStateToProps = (state) => {
   return {
     allPolls: state.GetPoll.data,
+    isLoading: state.DeletePoll.isLoading,
   };
 };
 
 const mapdispatchToProps = (dispatch) => {
   return {
     getPolls: () => dispatch(getPolls()),
+    deletePoll: (user) => dispatch(deletePoll(user)),
   };
 };
 export default connect(mapStateToProps, mapdispatchToProps)(AllPolls);
