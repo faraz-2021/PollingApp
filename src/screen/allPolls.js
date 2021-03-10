@@ -17,6 +17,7 @@ import { Colors } from "../component/Colors";
 import Material from "react-native-vector-icons/MaterialCommunityIcons";
 import { deletePoll } from "../redux/action/action";
 import { updatePoll } from "../redux/action/action";
+import { deleteOption } from "../redux/action/action";
 import UpdateModal from "../component/updateModal";
 
 const AllPolls = (props) => {
@@ -45,7 +46,7 @@ const AllPolls = (props) => {
   };
 
   const handleCLick = (id, title) => {
-    setModalVisible(id);
+    setId(id);
     setTitle(title);
   };
 
@@ -187,6 +188,7 @@ const mapdispatchToProps = (dispatch) => {
     getPolls: () => dispatch(getPolls()),
     deletePoll: (user) => dispatch(deletePoll(user)),
     updatePoll: (user) => dispatch(updatePoll(user)),
+    deleteOption: (user)=> dispatch(deleteOption(user))
   };
 };
 export default connect(mapStateToProps, mapdispatchToProps)(AllPolls);

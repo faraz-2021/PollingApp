@@ -16,6 +16,8 @@ import {
   DELETEPOLL_SUCCESS,
   UPDATE_POLL,
   POLL_UPDATED,
+  OPTION_DELETED,
+  DELETE_OPTION,
 } from "../constant/constant";
 export const LoginRequest = (user) => {
   return {
@@ -116,5 +118,19 @@ export const updatePoll = (user) => {
 export const pollUpdated = () => {
   return {
     type: POLL_UPDATED,
+  };
+};
+
+
+
+export const deleteOption = (user) => {
+  return {
+    type: DELETE_OPTION,
+    user,
+  };
+};
+export const optionDeleted = () => {
+  return {
+    type: OPTION_DELETED,
   };
 };

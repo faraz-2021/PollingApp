@@ -24,3 +24,8 @@ export const DELETEPOLL_SUCCESS = "DELETEPOLL_SUCCESS";
 
 export const UPDATE_POLL = "UPDATE_POLL";
 export const POLL_UPDATED = "POLL_UPDATED";
+
+export const DELETE_OPTION = "DELETE_OPTION";
+export const OPTION_DELETED = "OPTION_DELETED";
+
+

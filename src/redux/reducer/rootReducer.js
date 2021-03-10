@@ -6,6 +6,7 @@ import getPollReducer from "../reducer/getPollReducer";
 import AddPollReducer from "../reducer/addPollReducer";
 import DeletePollReducer from "./deletePollReducer";
 import UpdatePollReducer from "./updatePollReducer";
+import deleteOptionReducer from './deleteOptionReducer';
 
 const rootReducer = combineReducers({
   LoginReducer: LoginReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   AddPoll: AddPollReducer,
   DeletePoll: DeletePollReducer,
   UpdatePoll: UpdatePollReducer,
+  DeleteOption: deleteOptionReducer
 });
 
 export default rootReducer;
