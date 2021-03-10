@@ -18,6 +18,8 @@ import {
   POLL_UPDATED,
   OPTION_DELETED,
   DELETE_OPTION,
+  OPTION_ADDED,
+  ADD_OPTION,
 } from "../constant/constant";
 export const LoginRequest = (user) => {
   return {
@@ -134,3 +136,17 @@ export const optionDeleted = () => {
     type: OPTION_DELETED,
   };
 };
+
+
+export const addOption =(user)=>{
+  return{
+    type:ADD_OPTION,
+    user,
+  }
+}
+
+export const optionAdded = () =>{
+  return{
+    type:OPTION_ADDED,
+  }
+}

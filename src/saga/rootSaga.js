@@ -15,6 +15,8 @@ import { updatePoll } from "./updatePollSaga";
 import { UPDATE_POLL } from "../redux/constant/constant";
 import { DELETE_OPTION } from "../redux/constant/constant";
 import { deleteOption } from "./deleteOptionSaga";
+import { ADD_OPTION } from "../redux/constant/constant";
+import { addOption } from "./addOptionSaga";
 
 function* watchMan() {
   yield takeLatest(LOGIN_REQUEST, Login);
@@ -25,6 +27,7 @@ function* watchMan() {
   yield takeLatest(DELETEPOLL_REQUEST, deletePoll);
   yield takeLatest(UPDATE_POLL, updatePoll);
   yield takeLatest(DELETE_OPTION, deleteOption);
+  yield takeLatest(ADD_OPTION, addOption);
 }
 export default function* rootSaga() {
   yield all([watchMan()]);

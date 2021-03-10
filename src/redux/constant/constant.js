@@ -16,9 +16,6 @@ export const ADDPOLL_REQUEST = "ADDPOLL_REQUEST";
 export const ADDPOLL_SUCCESS = "ADDPOLL_SUCCESS";
 export const ADDPOLL_FAILURE = "ADDPOLL_FAILURE";
 
-export const ADD_POLL = "ADD_POLL";
-export const ADD_OPTION = "ADD_OPTION";
-
 export const DELETEPOLL_REQUEST = "DELETEPOLL_REQUEST";
 export const DELETEPOLL_SUCCESS = "DELETEPOLL_SUCCESS";
 
@@ -27,5 +24,12 @@ export const POLL_UPDATED = "POLL_UPDATED";
 
 export const DELETE_OPTION = "DELETE_OPTION";
 export const OPTION_DELETED = "OPTION_DELETED";
+
+export const ADD_OPTION = "ADD_OPTION";
+export const OPTION_ADDED = "OPTION_ADDED";
+
+
+
+
 
 

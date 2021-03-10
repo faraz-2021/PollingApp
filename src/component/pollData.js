@@ -5,6 +5,7 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
+  ActivityIndicator
 } from "react-native";
 import { deleteOption } from "../redux/action/action";
 import { connect } from "react-redux";
@@ -12,7 +13,6 @@ import Material from "react-native-vector-icons/MaterialCommunityIcons";
 import { Colors } from "./Colors";
 
 const PollData = (props) => {
-
   const handleCLick = (option) => {
     const user = {
       id: props.item._id,
@@ -21,23 +21,28 @@ const PollData = (props) => {
     props.deleteOption(user);
   };
   return (
-    <FlatList
-      data={props.item.options}
-      renderItem={({ item, index }) => (
-        <View style={styles.flex}>
-          <View style={styles.main}>
-            <Text style={styles.text1}>{index + 1}:</Text>
-            <Text style={styles.text2}>{item.option}</Text>
+    <View>
+      <FlatList
+        data={props.item.options}
+        renderItem={({ item, index }) => (
+          <View style={styles.flex}>
+            <View style={styles.main}>
+              <Text style={styles.text1}>{index + 1}:</Text>
+              <Text style={styles.text2}>{item.option}</Text>
+            </View>
+            <TouchableOpacity
+              style={{ marginRight: 20 }}
+              onPress={() => handleCLick(item.option)}
+            >
+              <Material name="delete" size={30} color={Colors.Blue} />
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            style={{ marginRight: 20 }}
-            onPress={() => handleCLick(item.option)}
-          >
-            <Material name="delete" size={30} color={Colors.Blue} />
-          </TouchableOpacity>
-        </View>
-      )}
-    />
+        )}
+      />
+      {props.isLoading ? (
+        <ActivityIndicator size="small" color={Colors.red} />
+      ) : null}
+    </View>
   );
 };
 const styles = StyleSheet.create({

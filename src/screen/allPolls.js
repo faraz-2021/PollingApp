@@ -19,6 +19,9 @@ import { deletePoll } from "../redux/action/action";
 import { updatePoll } from "../redux/action/action";
 import { deleteOption } from "../redux/action/action";
 import UpdateModal from "../component/updateModal";
+import Ion from "react-native-vector-icons/Ionicons";
+import AddOptionModal from '../component/addOptionModal';
+
 
 const AllPolls = (props) => {
   const [id, setId] = useState("");
@@ -50,6 +53,10 @@ const AllPolls = (props) => {
     setTitle(title);
   };
 
+  const OnClick = (id) =>{
+    setId(id);
+  }
+
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.flex}>
@@ -76,6 +83,16 @@ const AllPolls = (props) => {
                 >
                   <Text style={styles.text2}>{item.title}</Text>
                 </TouchableOpacity>
+                <View style={{flexDirection:"row"}}>
+                <TouchableOpacity
+                  style={{ marginRight: 20 }}
+                   onPress={() => {
+                    setOpen(true);
+                    OnClick(item._id);
+                  }}
+                >
+                  <Ion name="add-circle" size={30} color={Colors.Blue} />
+                </TouchableOpacity>
 
                 <TouchableOpacity
                   style={{ marginRight: 20 }}
@@ -83,6 +100,8 @@ const AllPolls = (props) => {
                 >
                   <Material name="delete" size={30} color={Colors.Blue} />
                 </TouchableOpacity>
+                </View>
+               
               </View>
 
               <PollData item={item} />
@@ -103,6 +122,15 @@ const AllPolls = (props) => {
       ) : null}
       {props.Loading ? (
         <ActivityIndicator size="small" color={Colors.red} />
+      ) : null}
+      {open ? (
+        <AddOptionModal
+          setOpen={setOpen}
+          open={open}
+          OnClick ={OnClick}
+          id={id}
+          
+        />
       ) : null}
     </View>
   );
