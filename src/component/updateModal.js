@@ -22,9 +22,9 @@ const UpdateModal = (props) => {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={props.open}
+        visible={props.open1}
         onRequestClose={() => {
-          setModalVisible(!props.open);
+          setOpen1(!props.open1);
         }}
       >
         <View style={styles.centeredView}>
@@ -40,7 +40,7 @@ const UpdateModal = (props) => {
                   style={{ fontSize: 20 }}
                   onPress={() => {
                     props.updatePoll(user);
-                    props.setOpen(false);
+                    props.setOpen1(false);
                   }}
                 >
                   Done
@@ -50,7 +50,7 @@ const UpdateModal = (props) => {
               <TouchableOpacity style={styles.btn}>
                 <Text
                   style={{ fontSize: 20 }}
-                  onPress={() => props.setOpen(false)}
+                  onPress={() => props.setOpen1(false)}
                 >
                   Cancel
                 </Text>

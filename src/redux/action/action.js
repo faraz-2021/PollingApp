@@ -20,6 +20,8 @@ import {
   DELETE_OPTION,
   OPTION_ADDED,
   ADD_OPTION,
+  VOTE_ADDED,
+  ADD_VOTE,
 } from "../constant/constant";
 export const LoginRequest = (user) => {
   return {
@@ -148,5 +150,18 @@ export const addOption =(user)=>{
 export const optionAdded = () =>{
   return{
     type:OPTION_ADDED,
+  }
+}
+
+export const addVote = (user)=>{
+  return{
+    type:ADD_VOTE,
+    user,
+  }
+}
+
+export const voteAdded = ()=>{
+  return{
+    type:VOTE_ADDED,
   }
 }

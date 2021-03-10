@@ -60,7 +60,7 @@ const AddOptionModal = (props) => {
             </View>
           </View>
         </View>
-        {props.isLoading ? (
+        {props.Loading ? (
           <ActivityIndicator size="small" color={Colors.red} />
         ) : null}
       </Modal>
@@ -125,8 +125,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
   return {
     allPolls: state.GetPoll.data,
-    Loading: state.GetPoll.isLoading,
-    isLoading: state.DeletePoll.isLoading,
+    Loading: state.DeletePoll.isLoading,
     isLoading: state.UpdatePoll.isLoading,
   };
 };

@@ -5,12 +5,13 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
-  ActivityIndicator
+  ActivityIndicator,
 } from "react-native";
 import { deleteOption } from "../redux/action/action";
 import { connect } from "react-redux";
 import Material from "react-native-vector-icons/MaterialCommunityIcons";
 import { Colors } from "./Colors";
+import { addVote } from "../redux/action/action";
 
 const PollData = (props) => {
   const handleCLick = (option) => {
@@ -20,6 +21,14 @@ const PollData = (props) => {
     };
     props.deleteOption(user);
   };
+  const onClick = async (option) => {
+    const user = {
+      id: props.item._id,
+      option: option,
+    };
+    props.addVote(user);
+  };
+
   return (
     <View>
       <FlatList
@@ -30,12 +39,25 @@ const PollData = (props) => {
               <Text style={styles.text1}>{index + 1}:</Text>
               <Text style={styles.text2}>{item.option}</Text>
             </View>
-            <TouchableOpacity
-              style={{ marginRight: 20 }}
-              onPress={() => handleCLick(item.option)}
-            >
-              <Material name="delete" size={30} color={Colors.Blue} />
-            </TouchableOpacity>
+            <View style={styles.flex1}>
+              <TouchableOpacity
+                style={{ marginRight: 20 }}
+                onPress={() => onClick(item.option)}
+              >
+                <Material
+                  name="checkbox-blank-circle-outline"
+                  size={30}
+                  color={Colors.green}
+                />
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={{ marginRight: 20 }}
+                onPress={() => handleCLick(item.option)}
+              >
+                <Material name="delete" size={30} color={Colors.Blue} />
+              </TouchableOpacity>
+            </View>
           </View>
         )}
       />
@@ -61,6 +83,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.lightgray,
   },
+  flex1: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
 });
 
 const mapStateToProps = (state) => {
@@ -72,6 +98,7 @@ const mapStateToProps = (state) => {
 const mapdispatchToProps = (dispatch) => {
   return {
     deleteOption: (user) => dispatch(deleteOption(user)),
+    addVote: (user) => dispatch(addVote(user)),
   };
 };
 export default connect(mapStateToProps, mapdispatchToProps)(PollData);

@@ -28,6 +28,10 @@ export const OPTION_DELETED = "OPTION_DELETED";
 export const ADD_OPTION = "ADD_OPTION";
 export const OPTION_ADDED = "OPTION_ADDED";
 
+export const ADD_VOTE= 'ADD_VOTE';
+export const VOTE_ADDED= 'VOTE_ADDED';
+
+
 
 
 

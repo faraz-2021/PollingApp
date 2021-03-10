@@ -23,10 +23,13 @@ import Ion from "react-native-vector-icons/Ionicons";
 import AddOptionModal from '../component/addOptionModal';
 
 
+
 const AllPolls = (props) => {
   const [id, setId] = useState("");
   const [title, setTitle] = useState("");
   const [open, setOpen] = useState(false);
+  const [open1, setOpen1] = useState(false);
+
 
   useEffect(() => {
     props.getPolls();
@@ -77,7 +80,7 @@ const AllPolls = (props) => {
                 <Text style={styles.text1}>{index + 1}:</Text>
                 <TouchableOpacity
                   onPress={() => {
-                    setOpen(true);
+                    setOpen1(true);
                     handleCLick(item._id, item.title);
                   }}
                 >
@@ -110,13 +113,13 @@ const AllPolls = (props) => {
           keyExtractor={(item) => item._id}
         />
       </View>
-      {open ? (
+      {open1 ? (
         <UpdateModal
           id={id}
           title={title}
           updatePoll={props.updatePoll}
-          setOpen={setOpen}
-          open={open}
+          setOpen1={setOpen1}
+          open1={open1}
           isLoading={props.isLoading}
         />
       ) : null}
