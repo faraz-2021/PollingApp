@@ -28,6 +28,10 @@ function Feed({ navigation }) {
 }
 
 function CustomDrawerContent(props) {
+  const clearAsyncStorage = async () => {
+    await AsyncStorage.clear();
+    props.navigation.navigate("Login");
+  };
   return (
     <DrawerContentScrollView contentContainerStyle={{ flex: 1 }}>
       <View style={styles.drawer}>
@@ -35,13 +39,16 @@ function CustomDrawerContent(props) {
           <View style={styles.profile}>
             <Feather name="user" size={25} />
             <Text style={styles.text}> Hello, </Text>
-            <Text style={styles.textAdmin}> {props.user} </Text>
+            <Text style={styles.textAdmin}> {props.name} </Text>
           </View>
           <View>
-            <DrawerItem
-              label="Add User"
-              onPress={() => props.navigation.navigate("AddUser")}
-            />
+            {props.role == "admin" ? (
+              <DrawerItem
+                label="Add User"
+                onPress={() => props.navigation.navigate("AddUser")}
+              />
+            ) : null}
+
             <DrawerItem
               label="All Users"
               onPress={() => {
@@ -60,7 +67,7 @@ function CustomDrawerContent(props) {
         </View>
 
         <View style={styles.signout}>
-          <DrawerItem label="Sign Out" onPress={props.clearAsyncStorage} />
+          <DrawerItem label="Sign Out" onPress={clearAsyncStorage} />
         </View>
       </View>
     </DrawerContentScrollView>
@@ -70,26 +77,25 @@ const Drawer = createDrawerNavigator();
 
 const Home = (props) => {
   const [name, setName] = useState();
+  const [role, setRole] = useState("");
 
   useEffect(() => {
     (async () => {
-      const id = await AsyncStorage.getItem("user");
-      setName(id);
+      if (props.isSuccess) {
+        const username = await AsyncStorage.getItem("user");
+        const role1 = await AsyncStorage.getItem("role");
+        setName(username);
+        setRole(role1);
+      }
     })();
-  }, []);
-
-  const clearAsyncStorage = async () => {
-    await AsyncStorage.clear();
-    props.navigation.navigate("Login");
-  };
-
+  }, [props.isSuccess]);
   return (
     <Drawer.Navigator
       drawerContent={() => (
         <CustomDrawerContent
-          user={name}
-          clearAsyncStorage={clearAsyncStorage}
           navigation={props.navigation}
+          user={name}
+          role={role}
         />
       )}
     >

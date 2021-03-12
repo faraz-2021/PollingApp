@@ -3,8 +3,10 @@ import { call, put } from "redux-saga/effects";
 import { LoginSuccess, LoginFailure } from "../redux/action/action";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { environment } from "../../envrionment";
+import jwt_decode from "jwt-decode";
 
 export function* Login(action) {
+  let decoded = "";
   if (action.user.username.length > 0 && action.user.password.length > 0) {
     try {
       yield call(async () => {
@@ -17,8 +19,11 @@ export function* Login(action) {
               alert(res.data.data);
             } else {
               await AsyncStorage.setItem("token", res.data.token);
-              await AsyncStorage.setItem("user", action.user.username);
 
+              decoded = jwt_decode(res.data.token);
+
+              await AsyncStorage.setItem("user", decoded.username);
+              await AsyncStorage.setItem("role", decoded.role);
               action.user.navigation.navigate("Home");
             }
             Token = await AsyncStorage.getItem("token");

@@ -20,19 +20,21 @@ import { updatePoll } from "../redux/action/action";
 import { deleteOption } from "../redux/action/action";
 import UpdateModal from "../component/updateModal";
 import Ion from "react-native-vector-icons/Ionicons";
-import AddOptionModal from '../component/addOptionModal';
-
-
+import AddOptionModal from "../component/addOptionModal";
 
 const AllPolls = (props) => {
   const [id, setId] = useState("");
   const [title, setTitle] = useState("");
   const [open, setOpen] = useState(false);
   const [open1, setOpen1] = useState(false);
-
+  const [role, setRole] = useState("");
 
   useEffect(() => {
     props.getPolls();
+    (async () => {
+      const role1 = await AsyncStorage.getItem("role");
+      setRole(role1);
+    })();
   }, []);
 
   const deleteAlert = (id) => {
@@ -56,9 +58,9 @@ const AllPolls = (props) => {
     setTitle(title);
   };
 
-  const OnClick = (id) =>{
+  const OnClick = (id) => {
     setId(id);
-  }
+  };
 
   return (
     <View style={{ flex: 1 }}>
@@ -77,34 +79,37 @@ const AllPolls = (props) => {
           renderItem={({ item, index }) => (
             <View>
               <View style={styles.data}>
-                <Text style={styles.text1}>{index + 1}:</Text>
-                <TouchableOpacity
-                  onPress={() => {
-                    setOpen1(true);
-                    handleCLick(item._id, item.title);
-                  }}
-                >
-                  <Text style={styles.text2}>{item.title}</Text>
-                </TouchableOpacity>
                 <View style={{flexDirection:"row"}}>
-                <TouchableOpacity
-                  style={{ marginRight: 20 }}
-                   onPress={() => {
-                    setOpen(true);
-                    OnClick(item._id);
-                  }}
-                >
-                  <Ion name="add-circle" size={30} color={Colors.Blue} />
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                  style={{ marginRight: 20 }}
-                  onPress={() => deleteAlert(item._id)}
-                >
-                  <Material name="delete" size={30} color={Colors.Blue} />
-                </TouchableOpacity>
+                  <Text style={styles.text1}>{index + 1}:</Text>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setOpen1(true);
+                      handleCLick(item._id, item.title);
+                    }}
+                  >
+                    <Text style={styles.text2}>{item.title}</Text>
+                  </TouchableOpacity>
                 </View>
-               
+
+                {role == "admin" ? (
+                  <View style={{ flexDirection: "row" }}>
+                    <TouchableOpacity
+                      style={{ marginRight: 20 }}
+                      onPress={() => {
+                        setOpen(true);
+                        OnClick(item._id);
+                      }}
+                    >
+                      <Ion name="add-circle" size={30} color={Colors.Blue} />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={{ marginRight: 20 }}
+                      onPress={() => deleteAlert(item._id)}
+                    >
+                      <Material name="delete" size={30} color={Colors.Blue} />
+                    </TouchableOpacity>
+                  </View>
+                ) : null}
               </View>
 
               <PollData item={item} />
@@ -113,7 +118,7 @@ const AllPolls = (props) => {
           keyExtractor={(item) => item._id}
         />
       </View>
-      {open1 ? (
+      {open1 && role == "admin" ? (
         <UpdateModal
           id={id}
           title={title}
@@ -130,9 +135,8 @@ const AllPolls = (props) => {
         <AddOptionModal
           setOpen={setOpen}
           open={open}
-          OnClick ={OnClick}
+          OnClick={OnClick}
           id={id}
-          
         />
       ) : null}
     </View>
@@ -219,7 +223,7 @@ const mapdispatchToProps = (dispatch) => {
     getPolls: () => dispatch(getPolls()),
     deletePoll: (user) => dispatch(deletePoll(user)),
     updatePoll: (user) => dispatch(updatePoll(user)),
-    deleteOption: (user)=> dispatch(deleteOption(user))
+    deleteOption: (user) => dispatch(deleteOption(user)),
   };
 };
 export default connect(mapStateToProps, mapdispatchToProps)(AllPolls);

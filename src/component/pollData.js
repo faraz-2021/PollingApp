@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -12,8 +12,18 @@ import { connect } from "react-redux";
 import Material from "react-native-vector-icons/MaterialCommunityIcons";
 import { Colors } from "./Colors";
 import { addVote } from "../redux/action/action";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 const PollData = (props) => {
+  const [role, setRole] = useState("");
+
+  useEffect(() => {
+    (async () => {
+      const role1 = await AsyncStorage.getItem("role");
+      setRole(role1);
+    })();
+  }, []);
   const handleCLick = (option) => {
     const user = {
       id: props.item._id,
@@ -39,25 +49,27 @@ const PollData = (props) => {
               <Text style={styles.text1}>{index + 1}:</Text>
               <Text style={styles.text2}>{item.option}</Text>
             </View>
-            <View style={styles.flex1}>
-              <TouchableOpacity
-                style={{ marginRight: 20 }}
-                onPress={() => onClick(item.option)}
-              >
-                <Material
-                  name="checkbox-blank-circle-outline"
-                  size={30}
-                  color={Colors.green}
-                />
-              </TouchableOpacity>
+            {role == "admin" ? (
+              <View style={styles.flex1}>
+                <TouchableOpacity
+                  style={{ marginRight: 20 }}
+                  onPress={() => onClick(item.option)}
+                >
+                  <Material
+                    name="checkbox-blank-circle-outline"
+                    size={30}
+                    color={Colors.green}
+                  />
+                </TouchableOpacity>
 
-              <TouchableOpacity
-                style={{ marginRight: 20 }}
-                onPress={() => handleCLick(item.option)}
-              >
-                <Material name="delete" size={30} color={Colors.Blue} />
-              </TouchableOpacity>
-            </View>
+                <TouchableOpacity
+                  style={{ marginRight: 20 }}
+                  onPress={() => handleCLick(item.option)}
+                >
+                  <Material name="delete" size={30} color={Colors.Blue} />
+                </TouchableOpacity>
+              </View>
+            ) : null}
           </View>
         )}
       />
